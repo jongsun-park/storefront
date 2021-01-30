@@ -38,8 +38,8 @@ const App = () => {
       <Switch>
         <Layout>
           <Route path="/" exact component={Homepage} />
-          <Route path="/blogs" component={Blogs} />
-          <Route path="/blog/:slug" component={Blog} />
+          {/* <Route path="/blogs" component={Blogs} />
+          <Route path="/blog/:slug" component={Blog} /> */}
           <Route path="/products" component={Products} />
           <Route path="/product/:slug" component={Product} />
           <Route path="/cart" component={Cart} />
