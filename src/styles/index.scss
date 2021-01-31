@@ -1,0 +1,43 @@
+@import "./reset.css";
+
+$gray: #333;
+$light-gray: #ccc;
+$white: #fff;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+a,
+a:hover,
+a:active {
+  color: initial;
+  text-decoration: none;
+}
+
+button,
+input {
+  outline: none;
+  padding: 10px 20px;
+  border: 1px solid $light-gray;
+  &.dark {
+    background: $gray;
+    color: $white;
+  }
+}
