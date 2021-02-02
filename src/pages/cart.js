@@ -12,7 +12,6 @@ const Cart = (props) => {
     closeCart,
     openCart,
     checkoutState,
-    setCount,
     getCount,
     updateQuantity,
     removeLineItem,

@@ -1,10 +1,5 @@
 import { useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useLocation,
-} from "react-router-dom";
+import { Switch, Route, useLocation } from "react-router-dom";
 // import { useSelector } from "react-redux";
 
 import { TransitionGroup, CSSTransition } from "react-transition-group";

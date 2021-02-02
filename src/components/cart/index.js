@@ -5,7 +5,7 @@ import {
   IoStorefrontOutline,
 } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { Container } from "../common/container";
 
