@@ -1,16 +1,76 @@
 import styled, { css } from "styled-components";
-import { colors } from "../../styles/theme";
+import { colors, media } from "../../styles/theme";
+
+export const Responsive = css`
+  @media (max-width: ${media.l}) {
+    background: teal;
+  }
+  @media (max-width: ${media.m}) {
+    background: orange;
+  }
+  @media (max-width: ${media.s}) {
+    background: navy;
+  }
+`;
+
+const RowResponsive = css`
+  @media (max-width: ${media.l}) {
+    // background: teal;
+  }
+  @media (max-width: ${media.m}) {
+    // background: orange;
+    flex-direction: column;
+    .col + .col {
+      margin-top: 20px;
+      margin-left: 0;
+      .quote-icon {
+        margin-bottom: 10px;
+      }
+    }
+  }
+  @media (max-width: ${media.s}) {
+    // background: navy;
+  }
+`;
+
+const heroCssResponsive = css`
+  @media (max-width: ${media.l}) {
+    // background: teal;
+  }
+  @media (max-width: ${media.m}) {
+    // background: orange;
+    align-items: flex-start;
+    text-align: left;
+    padding-right: 10%;
+    .hero__title {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+    }
+  }
+  @media (max-width: ${media.s}) {
+    // background: navy;
+
+    .hero__title {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+  }
+`;
 
 const heroCss = css`
   background-size: cover;
-  min-height: calc(100vh - 60px);
+  min-height: calc(90vh - 60px);
+
   .hero__title {
     font-size: 4rem;
     color: white;
-    line-height: 1.2;
+    max-width: 80%;
+    line-height: 1;
     font-weight: bold;
     margin-bottom: 3rem;
   }
+
+  ${heroCssResponsive}
 `;
 
 const CenterCss = css`
@@ -56,6 +116,31 @@ const QuoteCss = css`
       left: -36px;
     }
   }
+
+  @media (max-width: ${media.l}) {
+    // background: teal;
+  }
+  @media (max-width: ${media.m}) {
+    // background: orange;
+    .quote-icon {
+      margin-bottom: 10px;
+    }
+    .col {
+      margin-bottom: 40px;
+    }
+    .quote__text {
+      max-width: 80%;
+    }
+  }
+  @media (max-width: ${media.s}) {
+    // background: navy;
+    .col {
+      margin-bottom: 20px;
+    }
+    .quote__text {
+      max-width: 90%;
+    }
+  }
 `;
 
 const quicklinksCss = css`
@@ -72,19 +157,26 @@ const newsletterCss = css`
     margin-bottom: 20px;
     text-transform: uppercase;
   }
+  input:focus + button {
+    background: ${colors.primary};
+  }
+`;
+
+const fullwidthCss = css`
+  max-height: 60vh;
+  min-height: 500px;
+  min-width: 100vw;
 `;
 
 export const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto 50px;
-  padding: 30px 10%;
+  padding: 20px;
   background: ${({ background }) => background && background};
 
-  .white {
-    color: ${colors.white};
-  }
-
   ${(props) => props.cover && CoverCss}
+
+  ${(props) => props.fullwidth && fullwidthCss}
 
   .section__title {
     font-size: 2rem;
@@ -123,10 +215,16 @@ export const Container = styled.div`
         justify-content: center;
         align-items: flex-start;
       }
+
+      .footer--col__heading {
+        font-weight: bold;
+      }
     }
     .col + .col {
       margin-left: 20px;
     }
+
+    ${RowResponsive}
   }
 
   &.quote {

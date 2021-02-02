@@ -1,6 +1,13 @@
 import { useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useLocation,
+} from "react-router-dom";
+// import { useSelector } from "react-redux";
+
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 // shpoify
 import { useShopify } from "./modules/shopify";
@@ -13,6 +20,7 @@ import Blogs from "./pages/blogs";
 import Blog from "./pages/blog";
 import Products from "./pages/products";
 import Product from "./pages/product";
+import Collection from "./pages/collection";
 
 const App = () => {
   const {
@@ -29,23 +37,26 @@ const App = () => {
     // fetchCollection()
   }, []);
 
-  const appState = useSelector((state) => state);
+  // const appState = useSelector((state) => state);
 
-  console.log(appState);
+  const location = useLocation();
 
   return (
-    <Router>
-      <Switch>
+    <TransitionGroup>
+      <CSSTransition key={location.key} classNames="fade" timeout={300}>
         <Layout>
-          <Route path="/" exact component={Homepage} />
-          <Route path="/blogs" component={Blogs} />
-          <Route path="/blog/:slug" component={Blog} />
-          <Route path="/products" component={Products} />
-          <Route path="/product/:slug" component={Product} />
-          <Route path="/cart" component={Cart} />
+          <Switch location={location}>
+            <Route path="/" exact component={Homepage} />
+            <Route path="/blogs" component={Blogs} />
+            <Route path="/blog/:slug" component={Blog} />
+            <Route path="/products" component={Products} />
+            <Route path="/product/:slug" component={Product} />
+            <Route path="/collection/:collectionId" component={Collection} />
+            <Route path="/cart" component={Cart} />
+          </Switch>
         </Layout>
-      </Switch>
-    </Router>
+      </CSSTransition>
+    </TransitionGroup>
   );
 };
 

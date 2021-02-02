@@ -1,34 +1,47 @@
 import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+import { useEffect } from "react";
+import styled, { css } from "styled-components";
 
 import { Container } from "../common/container";
 import { useShopify } from "../../modules/shopify";
 
+import CartButton from "../cart/button";
+
+import { media } from "../../styles/theme";
+
 const routes = [
   { name: "homepage", path: "/" },
-  { name: "blogs", path: "/blogs" },
+  { name: "blogs", path: "/blogs", disabled: true },
+  { name: "projects", path: "/projects", disabled: true },
   { name: "products", path: "/products" },
 ];
 
-const Cart = () => {
-  const { cartCount } = useShopify();
-  return (
-    <NavLink to="/cart" activeClassName="selected">
-      Cart {cartCount}
-    </NavLink>
-  );
-};
-
 const Naviagtion = () => {
+  useEffect(() => {
+    const disabled = document.querySelectorAll(".disabled");
+    // console.log(disabled);
+    disabled.forEach((element) => {
+      element.addEventListener("click", (e) => e.preventDefault());
+    });
+  }, []);
+
   return (
-    <nav className="header__navigation">
-      {routes.map(({ name, path }) => (
-        <NavLink to={path} key={name} exact activeClassName="selected">
-          {name}
-        </NavLink>
-      ))}
-      <Cart />
-    </nav>
+    <>
+      <nav className="header__navigation">
+        {routes.map(({ name, path, disabled }) => (
+          <NavLink
+            to={path}
+            key={name}
+            exact
+            activeClassName="selected"
+            className={`${disabled ? "disabled" : ""}`}
+          >
+            {name}
+          </NavLink>
+        ))}
+      </nav>
+      <CartButton />
+    </>
   );
 };
 
@@ -62,14 +75,30 @@ const Footer = () => {
 };
 
 const Layout = ({ children }) => (
-  <div>
+  <>
     <Header />
     <main>{children}</main>
     <Footer />
-  </div>
+  </>
 );
 
 export default Layout;
+
+const NavigationResponsive = css`
+  @media (max-width: ${media.m}) {
+    // background: orange;
+    .header__navigation {
+      display: none;
+      min-width: 320px;
+    }
+  }
+
+  @media (max-width: ${media.s}) {
+    button span {
+      display: none;
+    }
+  }
+`;
 
 const FlatContainer = styled(Container)`
   padding: 20px;
@@ -78,6 +107,7 @@ const FlatContainer = styled(Container)`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 
   .header__logo {
     text-transform: uppercase;
@@ -90,12 +120,19 @@ const FlatContainer = styled(Container)`
       border-bottom: 1px solid transparent;
     }
     a + a {
-      margin-left: 10px;
+      margin-left: 20px;
     }
 
     .selected {
       border-bottom: 1px solid black;
       padding-bottom: 4px;
     }
+
+    .disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
   }
+
+  ${NavigationResponsive}
 `;

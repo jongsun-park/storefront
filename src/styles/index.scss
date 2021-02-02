@@ -24,6 +24,26 @@ code {
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+#root > div {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  > * {
+    width: 100%;
+  }
+  main {
+    flex: 1;
+    position: relative;
+  }
+}
+
 a,
 a:hover,
 a:active {
@@ -40,4 +60,48 @@ input {
     background: $gray;
     color: $white;
   }
+}
+
+button,
+a {
+  cursor: pointer;
+}
+
+select,
+label,
+label + input {
+  min-width: 100px;
+  display: inline-block;
+  line-height: 1.5;
+  border: none;
+}
+
+label + input:active,
+label + input:focus {
+  background: $light-gray;
+}
+
+.lightgray {
+  color: $light-gray;
+}
+
+.white {
+  color: $white;
+}
+
+p {
+  line-height: 1.3;
+  font-size: 14px;
+}
+
+// page transition
+
+.fade-enter {
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 250ms ease-in;
 }

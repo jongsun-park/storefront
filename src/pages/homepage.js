@@ -1,6 +1,9 @@
 import { Container } from "../components/common/container";
 import { StyledButton } from "../components/common/button";
 import { Image } from "../components/common/image";
+import Collections from "../components/section/collections";
+
+// images
 import hero from "../assets/images/hero.jpg";
 import blue from "../assets/images/blue-toy.jpg";
 import will1 from "../assets/images/will-1.jpg";
@@ -10,11 +13,7 @@ import cartoons from "../assets/images/cartoons.jpg";
 import quote from "../assets/images/quote.svg";
 import mat from "../assets/images/mat.jpg";
 
-import { useShopify } from "../modules/shopify";
-
 const Homepage = () => {
-  const { products } = useShopify();
-
   return (
     <>
       <Container className="hero" fullwidth background={`url(${hero})`}>
@@ -25,7 +24,7 @@ const Homepage = () => {
       </Container>
       <Container className="row">
         <div className="col">
-          <Image url={blue} />
+          <Image contain url={blue} />
         </div>
         <div className="col content">
           <h2 className="section__title">
@@ -70,21 +69,7 @@ const Homepage = () => {
         </div>
       </Container>
       <Container>
-        <h2 className="section__title center">FEATURED COLLECTION</h2>
-        <div className="row">
-          <div className="col">
-            <Image url={will3} className="col-4" />
-          </div>
-          <div className="col">
-            <Image url={will3} className="col-4" />
-          </div>
-          <div className="col">
-            <Image url={will3} className="col-4" />
-          </div>
-          <div className="col">
-            <Image url={will3} className="col-4" />
-          </div>
-        </div>
+        <Collections />
       </Container>
       <Container fullwidth cover background={`url(${cartoons})`}>
         <p className="section__title small white">
@@ -127,7 +112,7 @@ const Homepage = () => {
       <Container fullwidth cover background={`url(${mat})`}></Container>
       <Container className="row">
         <div className="col quicklinks">
-          <p>Quick links</p>
+          <p className="footer--col__heading">Quick links</p>
           <ul>
             <li>Search</li>
             <li>Shipping and Return Policy</li>
@@ -136,7 +121,7 @@ const Homepage = () => {
           </ul>
         </div>
         <div className="col newsletter">
-          <p>Newsletter</p>
+          <p className="footer--col__heading">Newsletter</p>
           <form onSubmit={(e) => e.preventDefault()}>
             <input
               type="email"

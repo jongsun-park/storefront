@@ -190,6 +190,19 @@ function handleSetCount(count) {
   };
 }
 
+// utils - Get the count of items in the cart
+
+export const getCount = (checkoutState) => {
+  const { lineItems } = checkoutState;
+  let itemCounts = 0;
+  if (lineItems && lineItems.length > 0) {
+    lineItems.forEach(({ quantity }) => {
+      itemCounts = itemCounts += quantity;
+    });
+  }
+  return itemCounts;
+};
+
 export function useShopify() {
   const dispatch = useDispatch();
   const cartStatus = useSelector((appState) => appState.shopify.isCartOpen);
@@ -235,5 +248,6 @@ export function useShopify() {
     updateQuantity,
     removeLineItem,
     setCount,
+    getCount,
   };
 }
